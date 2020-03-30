@@ -1,0 +1,16 @@
+﻿{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/Style.css' %}" />
+
+{% if latest_question_list %}
+    <ul>
+        {% for question in latest_question_list %}
+        <!--硬编码-->
+        <!--<li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>-->
+        <!--软编码，通过urlsconf中获取,polls:detail指向应用名:name-url名-->
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
